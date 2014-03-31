@@ -42,4 +42,8 @@ if $services =~ /\bstatic\b/ {
   include site_static
 }
 
+if $services =~ /\bgit\b/ {
+  include site_git
+}
+
 include site_config::packages::uninstall
