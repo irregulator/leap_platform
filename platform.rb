@@ -17,12 +17,13 @@ Leap::Platform.define do
   #
   self.paths = {
     # directories
-    :hiera_dir        => 'hiera',
-    :files_dir        => 'files',
-    :nodes_dir        => 'nodes',
-    :services_dir     => 'services',
-    :tags_dir         => 'tags',
-    :node_files_dir   => 'files/nodes/#{arg}',
+    :hiera_dir              => 'hiera',
+    :files_dir              => 'files',
+    :nodes_dir              => 'nodes',
+    :services_dir           => 'services',
+    :tags_dir               => 'tags',
+    :node_files_dir         => 'files/nodes/#{arg}',
+    :service_definition_dir => 'files/service-definitions/#{arg}',
 
     # input config files
     :common_config    => 'common.json',
@@ -39,6 +40,7 @@ Leap::Platform.define do
 
     # input templates
     :provider_json_template        => 'files/service-definitions/provider.json.erb',
+    :configs_json_template         => 'files/service-definitions/#{arg}/configs.json.erb',
     :eip_service_json_template     => 'files/service-definitions/#{arg[0]}/eip-service#{arg[1]}.json.erb',
     :soledad_service_json_template => 'files/service-definitions/#{arg}/soledad-service.json.erb',
     :smtp_service_json_template    => 'files/service-definitions/#{arg}/smtp-service.json.erb',

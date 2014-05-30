@@ -1,0 +1,29 @@
+<%=
+  def list_files(service, path, name)
+    formats = []
+    Dir.glob("#{path}/#{name}-*.json.erb").each do |file|
+      index = File.basename(file).gsub(/[^0-9]/,'')
+      if index == ''
+        index = "1"
+      end
+      formats << index
+      service[index] = File.basename(file).gsub(/\.erb$/,"")
+    end
+    service["formats"] = formats.compact
+  end
+
+  hsh     = {}
+  eip     = {}
+  soledad = {}
+  smtp    = {}
+  path    = Path.named_path([:service_definition_dir, 'v1'], Path.provider_base)
+
+  list_files(eip, path, "eip")
+  list_files(soledad, path, "soledad")
+  list_files(smtp, path, "smtp")
+
+  hsh["eip"]     = eip
+  hsh["soledad"] = soledad
+  hsh["smtp"]    = smtp
+  JSON.sorted_generate hsh
+%>
