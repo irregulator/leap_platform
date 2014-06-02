@@ -6,6 +6,7 @@ class site_webapp {
   $eip_service_2    = $definition_files['eip_service_2']
   $soledad_service  = $definition_files['soledad_service']
   $smtp_service     = $definition_files['smtp_service']
+  $configs_versions = $definition_files['configs']
   $node_domain      = hiera('domain')
   $provider_domain  = $node_domain['full_suffix']
   $webapp           = hiera('webapp')
@@ -127,6 +128,11 @@ class site_webapp {
 
     "/srv/leap/webapp/public/${api_version}/config/eip-service-2.json":
       content => $eip_service_2,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
+    "/srv/leap/webapp/public/${api_version}/config/configs.json":
+      content => $configs_versions,
       require => Vcsrepo['/srv/leap/webapp'],
       owner   => leap-webapp, group => leap-webapp, mode => '0644';
 
