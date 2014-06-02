@@ -96,6 +96,31 @@ class site_webapp {
     '/srv/leap/webapp/public/provider.json':
       ensure => absent;
 
+    "/srv/leap/webapp/config/provider/eip-service.json":
+      content => $eip_service,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
+    "/srv/leap/webapp/config/provider/soledad-service.json":
+      content => $soledad_service,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
+    "/srv/leap/webapp/config/provider/smtp-service.json":
+      content => $smtp_service,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
+    "/srv/leap/webapp/config/provider/eip-service-2.json":
+      content => $eip_service_2,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
+    "/srv/leap/webapp/config/provider/configs.json":
+      content => $configs_versions,
+      require => Vcsrepo['/srv/leap/webapp'],
+      owner   => leap-webapp, group => leap-webapp, mode => '0644';
+
     '/srv/leap/webapp/public/ca.crt':
       ensure  => link,
       require => Vcsrepo['/srv/leap/webapp'],
